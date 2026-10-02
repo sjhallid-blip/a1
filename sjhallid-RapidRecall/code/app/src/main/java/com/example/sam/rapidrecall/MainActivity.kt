@@ -14,13 +14,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.sam.rapidrecall.ui.theme.RapidRecallTheme
 
 class MainActivity : ComponentActivity() {
+
+    val viewModel = HistoryModel()
+    val viewController = GameController(viewModel)
+    val viewInstance = GameView(viewController)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.addObserver(viewInstance)
         enableEdgeToEdge()
         setContent {
             RapidRecallTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
+                    viewInstance.Content(Modifier.padding(innerPadding))
                 }
             }
         }
