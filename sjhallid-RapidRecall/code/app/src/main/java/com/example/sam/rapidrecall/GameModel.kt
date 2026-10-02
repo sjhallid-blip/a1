@@ -2,6 +2,9 @@ package com.example.sam.rapidrecall
 
 import kotlin.random.Random
 
+// Model for running a game
+// Responsible for creating and supplying HistoryModel the random sequence
+// Responsible for checking if the guess was correct
 class GameModel (
     private val sequenceLength: Int
 ){

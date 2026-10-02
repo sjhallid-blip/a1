@@ -3,12 +3,15 @@ package com.example.sam.rapidrecall
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
 
+// This is the main model for driving the game and storing logs.
+// It implements ObservableModel in order to have views be updated.
+// It uses GameModel to run specific games, by creating, inputting the guess and destroying it
 class HistoryModel: ObservableModel<HistoryModel>() {
     private var pastGames = mutableListOf<PastGame>()
     private var numPastGames: Int = 0
     private var currentGame: GameModel? = null
     private var currentNum: Int? = null
-    private var totalAccuracy = 0
+    private var totalAccuracy = 0.0
     private var wasCorrect = false
     private var guess = ""
     private var theCorrectSequence = ""
@@ -19,7 +22,7 @@ class HistoryModel: ObservableModel<HistoryModel>() {
     fun getPastGames(): List<PastGame> = pastGames
     fun getNumPastGames(): Int = numPastGames
     fun getCurrentNum(): Int? = currentNum
-    fun getTotalAccuracy(): Int = totalAccuracy
+    fun getTotalAccuracy(): Double = totalAccuracy
     fun getWasCorrect(): Boolean = wasCorrect
     fun getTheGuess(): String = guess
     fun getTheCorrectSequence(): String = theCorrectSequence
@@ -58,7 +61,7 @@ class HistoryModel: ObservableModel<HistoryModel>() {
         this.notifyObservers(this)
     }
 
-    fun computeAccuracy(){
+    private fun computeAccuracy(){
         var totalWins = 0
         var totalLosses = 0
         for(i in pastGames){
@@ -66,8 +69,7 @@ class HistoryModel: ObservableModel<HistoryModel>() {
             else totalLosses++
         }
         correctguesses = totalWins
-        totalAccuracy = if(totalWins==0 && totalLosses==0) 0
-        else totalWins/(totalWins+totalLosses)
+        totalAccuracy = totalWins.toDouble()/(totalWins.toDouble()+totalLosses.toDouble())
     }
 
 }

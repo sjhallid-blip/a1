@@ -1,5 +1,6 @@
 package com.example.sam.rapidrecall
 
+// This interface is implemented by every model that should be observed, such as the HistoryModel
 abstract class ObservableModel<M> {
     private val observers = mutableListOf< ViewObserver<M> >()
     // “all models keep track of their views”
@@ -17,41 +18,3 @@ abstract class ObservableModel<M> {
         }
     }
 }
-
-
-//class MyView(myController: MyController ): ViewObserver<MyModel> {
-//    var currentCount by { mutableIntStateOf(0) };
-//
-//    override fun update(newModel: MyModel) {
-//        currentCount = newModel.count;
-//    }
-//
-//    @Composable
-//    fun Content() {
-//        Text(currentCount)
-//        Button(onClick = {
-//            myController.increaseCount()
-//        })
-//    }
-//}
-//
-//class MyController(model: MyModel) {
-//    fun increaseCount() {
-//        model.setCount(model.count + 1)
-//    }
-//}
-//
-//class MainActivity() {
-//    val viewInstance = MyView()
-//    val viewModel = MyModel()
-//    val viewController = MyController(viewModel)
-//    viewModel.addObserver(viewInstance)
-//
-//    viewModel.setCount(2)
-//
-//    onCreate() {
-//        Scaffold() {
-//            viewInstance.Content()
-//        }
-//    }
-//}

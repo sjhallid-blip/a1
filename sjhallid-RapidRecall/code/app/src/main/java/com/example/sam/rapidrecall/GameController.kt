@@ -1,6 +1,7 @@
 package com.example.sam.rapidrecall
 
-class GameController(val model: HistoryModel) {
+// Responsible for sending messages from the view to the HistoryModel
+class GameController(private val model: HistoryModel) {
     fun guessInt(g: String){
         model.guess( g.map { it.digitToInt() })
     }
